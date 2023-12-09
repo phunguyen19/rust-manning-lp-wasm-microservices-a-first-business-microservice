@@ -42,7 +42,7 @@ jobs:
         nohup wasmedge sales_tax_rate_lookup.wasm &
         echo $! > wasmedge.pid
         sleep 15
-        resp=$(curl http://localhost:8001/find_rate -X POST -d "78701")
+        resp=$(curl http://localhost:8001/find_rate_csv -X POST -d "78701")
         echo "$resp"
         if [[ $resp == "0.0825" ]]; then
           echo -e "Execution Success!"
@@ -50,9 +50,9 @@ jobs:
           echo -e "Execution Fail!"
           exit 1
         fi
-        resp=$(curl http://localhost:8001/find_rate -X POST -d "12345")
+        resp=$(curl http://localhost:8001/find_rate_csv -X POST -d "12345")
         echo "$resp"
-        if [[ $resp == "0.08" ]]; then
+        if [[ $resp == "Zip Code Not Found" ]]; then
           echo -e "Execution Success!"
         else
           echo -e "Execution Fail!"
