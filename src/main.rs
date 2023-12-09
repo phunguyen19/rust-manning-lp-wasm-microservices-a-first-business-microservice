@@ -72,8 +72,8 @@ async fn not_found_handler(_req: Request<Body>) -> Result<Response<Body>, anyhow
 async fn handle_request(req: Request<Body>) -> Result<Response<Body>, anyhow::Error> {
     match (req.uri().path(), req.method()) {
         ("/", &Method::GET) => root_handler(req).await,
-        ("/find_rate_csv", &Method::POST) => find_rate_csv_handler(req).await,
         ("/find_rate_api", &Method::POST) => find_rate_api_handler(req).await,
+        ("/find_rate_csv", &Method::POST) => find_rate_csv_handler(req).await,
         _ => not_found_handler(req).await,
     }
 }
